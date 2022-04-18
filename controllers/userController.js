@@ -12,13 +12,13 @@ const userCount = async () =>
 
 
 module.exports = {
-    // GET request to return all users.
+    // For GET request to return all users.
     getUsers(req, res) {
         User.find()
           .then(async (users) => {
             const userObj = {
               users,
-              userCount: await userCount(),
+              // userCount: await userCount(),
             };
             return res.json(userObj);
           })
@@ -28,7 +28,7 @@ module.exports = {
           });
       },
 
-    // GET request to run a single user by their _id and populated thought and friend data.
+    // For GET request to run a single user by their _id and populated thought and friend data.
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
         .select('-__v')
@@ -47,14 +47,14 @@ module.exports = {
         });
     },
 
-    // POST request to create a new user.
+    // For POST request to create a new user.
     createUser(req, res) {
         User.create(req.body)
         .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
 
-    // PUT request to update a user by their _id.
+    // For PUT request to update a user by their _id.
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -69,7 +69,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // DELETE request to remove a user by their _id.
+    // For DELETE request to remove a user by their _id.
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
         // .then((user) =>
@@ -87,7 +87,7 @@ module.exports = {
         });
     },
 
-    // POST request to add a new friend to a user's friend list.
+    // For POST request to add a new friend to a user's friend list.
     addFriend(req, res) {
         console.log(`You are adding a friend to a user's friend list`);
         console.log(req.body);
@@ -106,7 +106,7 @@ module.exports = {
           .catch((err) => res.status(500).json(err));
     },
 
-    // DELETE request to remove a friend from a user's friend list.
+    // For DELETE request to remove a friend from a user's friend list.
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },

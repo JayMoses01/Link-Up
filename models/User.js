@@ -14,10 +14,10 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: {
-                validator: () => Promise.resolve(false),
-                message: 'Email validation failed'
-            }
+            // validate: {
+            //     validator: () => Promise.resolve(false),
+            //     message: 'Email validation failed'
+            // },
         },
         thoughts: [
             {
