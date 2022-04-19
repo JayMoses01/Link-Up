@@ -81,6 +81,7 @@ module.exports = {
         //         { new: true }
         //       )
         // )
+        .then(() => res.json({ message: 'User has been deleted!' }))
         .catch((err) => {
           console.log(err);
           res.status(500).json(err);

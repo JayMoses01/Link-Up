@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const thoughtSchema = require('./Thought');
 
+// const validator = require('validator');
+
 // Schema to create User model.
 const userSchema = new Schema(
     {
@@ -47,6 +49,6 @@ userSchema
     return this.friends.length;
   });
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
