@@ -7,10 +7,6 @@ const userCount = async () =>
     .then((numberOfUsers) => numberOfUsers);
 
 
-// I might need to create const to get thoughts and one for friends
-
-
-
 module.exports = {
     // For GET request to return all users.
     getUsers(req, res) {
@@ -30,16 +26,12 @@ module.exports = {
 
     // For GET request to run a single user by their _id and populated thought and friend data.
     getSingleUser(req, res) {
-        User.findOne({ _id: req.params.userId })
+        User.findById({ _id: req.params.userId })
         .select('-__v')
         .then(async (user) =>
           !user
             ? res.status(404).json({ message: 'No user with that ID' })
-            : res.json({ // JRM: there might be issues with this part.
-                user,
-                Thought,
-                friends,
-              })
+            : res.json(user)
         )
         .catch((err) => {
           console.log(err);

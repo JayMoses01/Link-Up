@@ -23,19 +23,18 @@ module.exports = {
 
     // For POST request to create a new thought and push the created thought's _id to the associated user's thoughts array field.
     createThought(req, res) {
-        console.log(`You are adding a thought to a user's thoughts list`);
-        console.log(req.body);
+        Thought.create(req.body);
         User.findOneAndUpdate(
           { _id: req.params.userId },
           { $addToSet: { thoughts: req.body } },
           { runValidators: true, new: true }
         )
-          .then((user) =>
-            !user
+          .then((thought) =>
+            !thought
               ? res
                   .status(404)
                   .json({ message: 'No user found with that ID :(' })
-              : res.json(user)
+              : res.json(thought)
           )
           .catch((err) => res.status(500).json(err));
     },
